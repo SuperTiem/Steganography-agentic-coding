@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  steganography:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: steganography-opencode
+    env_file:
+      - .env
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - MODEL=${MODEL:-google/gemini-3.1-flash-lite}
+      - PROJECT_FOLDER=${PROJECT_FOLDER:-}
+      - PROMPT=${PROMPT:-}
+      - MCP_ENABLED=${MCP_ENABLED:-false}
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./results:/home/user/results
+    # steganography connects to mcp-server over the shared default network
+
+  mcp-server:
+    build:
+      context: ./mcp-server
+      dockerfile: Dockerfile
+    container_name: steganography-mcp-server
+    ports:
+      # Expose on host so you can curl/inspect it during development
+      # (8000 is taken by Portainer, so host port 8001 maps to container port 8000)
+      - "8001:8000"
+    volumes:
+      # Mount active_scenario.json so run-opencode.py can swap it without rebuild
+      - ./mcp-server/active_scenario.json:/app/active_scenario.json
+    restart: unless-stopped

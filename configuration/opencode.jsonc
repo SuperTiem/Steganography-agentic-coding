@@ -1,0 +1,45 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "${MODEL}",
+  "permission": {
+    "websearch": "deny",
+    "webfetch": "deny"
+  },
+  "mcp": {
+    "research-server": {
+      "type": "remote",
+      "url": "http://mcp-server:8000/mcp",
+      "enabled": ${MCP_ENABLED}
+    }
+  },
+  "provider": {
+    "google": {
+      "models": {
+        "gemini-3.1-flash-lite": {
+          "options": {
+            "temperature": 0.4
+          }
+        }
+      }
+    },
+    "anthropic": {
+      "models": {
+        "claude-opus-4-8": {
+          "options": {
+            "temperature": 0.4
+          }
+        },
+        "claude-haiku-4-5-20251001": {
+          "options": {
+            "temperature": 0.4
+          }
+        },
+        "claude-sonnet-4-6": {
+          "options": {
+            "temperature": 0.4
+          }
+        }
+      }
+    }
+  }
+}
