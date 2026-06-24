@@ -134,6 +134,9 @@ Examples:
   # Run all iterations
   %(prog)s --all
 
+  # Continue from a specific ID (inclusive)
+  %(prog)s --from 3102 --model anthropic/claude-opus-4-8
+
   # List all available iterations
   %(prog)s --list
         """
@@ -143,6 +146,8 @@ Examples:
     group.add_argument("--id", type=str, help="Run a specific iteration by its ID")
     group.add_argument("--technique", type=str, help="Run all iterations matching a specific technique")
     group.add_argument("--all", action="store_true", help="Run all iterations")
+    group.add_argument("--from", dest="from_id", type=str, metavar="ID",
+                       help="Run all iterations starting from (and including) the given ID")
     group.add_argument("--list", action="store_true", help="List all available iterations")
 
     parser.add_argument(
@@ -205,6 +210,14 @@ Examples:
         if not to_run:
             print(f"Error: No iteration found with technique '{args.technique}'")
             return 1
+    elif args.from_id:
+        ids = [item.get("id") for item in iterations_list]
+        if args.from_id not in ids:
+            print(f"Error: No iteration found with ID '{args.from_id}'")
+            return 1
+        start = ids.index(args.from_id)
+        to_run = iterations_list[start:]
+        print(f">>> Continuing from ID {args.from_id} ({len(to_run)} iteration(s) remaining)")
 
     overall_exit_code = 0
     for item in to_run:

@@ -108,7 +108,7 @@ elif [ -n "$PROMPT" ]; then
     echo "Starting opencode in container..."
     cd "$SCRIPT_DIR"
     # Explicitly call entrypoint script with PROJECT_FOLDER and PROMPT
-    docker compose run --rm -it \
+    docker compose run --rm \
         -e PROJECT_FOLDER="/projects/$PROJECT_NAME" \
         -e PROMPT="$PROMPT" \
         -e MODEL="$MODEL" \
