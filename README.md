@@ -217,7 +217,7 @@ The original code in this repository (testbed, scenario runners, payloads, and
 analysis scripts) is released under the [MIT License](LICENSE).
 
 Workspace artifacts derived from the [Flask](https://github.com/pallets/flask)
-project remain under Flask's BSD 3-Clause License. See [NOTICE](NOTICE) for
+project remain under Flask's BSD 3-Clause License. See [LICENSE](LICENSE) for
 details and attribution.
 
 ## Intended use
