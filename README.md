@@ -213,5 +213,18 @@ The full, authoritative definition lives in `scenarios.json` (run
 ---
 ## License
 
-No license has been chosen yet. Until one is added, all rights are reserved by
-the author(s). A license will be selected prior to public release.
+The original code in this repository (testbed, scenario runners, payloads, and
+analysis scripts) is released under the [MIT License](LICENSE).
+
+Workspace artifacts derived from the [Flask](https://github.com/pallets/flask)
+project remain under Flask's BSD 3-Clause License. See [NOTICE](NOTICE) for
+details and attribution.
+
+## Intended use
+
+This repository is released for research and educational purposes, to support
+reproduction of the experiments in the accompanying paper. It contains working
+steganographic prompt-injection payloads; the injected command is a benign
+loopback request (`curl localhost:8080`) chosen so the experiments cross no real
+security boundary. Please use these materials responsibly and only in
+environments you are authorised to test.
